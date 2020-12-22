@@ -35,7 +35,7 @@ public class Checkout {
 			itemIterator(itemId);
 
 		}else {
-			System.out.println("Item desconhecido, operação cancelada.");
+			System.out.println("Unknown item. Couldn't finish operation.");
 		}
 
 	}
@@ -155,7 +155,7 @@ public class Checkout {
 			int fullPrice = minQuantity*unitPrice;
 			int discountMultiplier = itemInterator/minQuantity;
 			discount = (fullPrice - specialPrice)*discountMultiplier;
-			System.out.println("Você ganhou um desconto de: " + discount +" no item "+ itemID);
+			System.out.println("You recieved " + discount +" off on item "+ itemID);
 		}else {
 			discount = 0;
 		}
@@ -191,7 +191,7 @@ public class Checkout {
 				System.out.println(i.getId()+" | "+ i.getPrice());
 			}
 		}else {
-			System.out.println("Não há itens na lista");
+			System.out.println("There's no item on this list.");
 		}
 	}
 
