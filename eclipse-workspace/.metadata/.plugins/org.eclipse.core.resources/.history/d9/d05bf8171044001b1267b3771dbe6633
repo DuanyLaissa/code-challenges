@@ -1,0 +1,6 @@
+package control;
+
+public enum ItemsIDsEnum {
+A, B ,C , D;
+	
+}

@@ -1,0 +1,19 @@
+
+public class Item {
+	
+	String id;
+	int price;
+	int specialPrice;
+	
+	public Item (String id, int price) {
+		this.id = id;
+		this.price = price;
+	}
+	
+	public Item (String id, int price, int specialPrice) {
+		this.id = id;
+		this.price = price;
+		this.specialPrice = specialPrice;
+		}
+
+}

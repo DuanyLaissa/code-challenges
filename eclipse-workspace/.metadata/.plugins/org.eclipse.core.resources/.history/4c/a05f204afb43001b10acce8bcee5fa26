@@ -1,0 +1,34 @@
+package control;
+
+import java.util.HashMap;
+
+public class PriceRules {
+	
+	private HashMap <String, int[]> pricingRulesTable;
+	
+	
+	public PriceRules() {
+
+		pricingRulesTable = new HashMap<String, int[]>();
+		
+	}
+	
+	public int newPriceRule(String itemId, int unitPrice, int quantity, int specialPrice ) {
+		
+		int[] values = {unitPrice, quantity, specialPrice};
+		this.pricingRulesTable.put(itemId, values);
+		return values[0];
+	}
+
+	public void printTable() {
+		for (String i :pricingRulesTable.keySet()) {
+			System.out.println("Item "+ i);
+			
+			for (int[] a: pricingRulesTable.values()) {
+				System.out.println( " "+ a+" ");
+			}
+			
+		}
+	}
+
+}

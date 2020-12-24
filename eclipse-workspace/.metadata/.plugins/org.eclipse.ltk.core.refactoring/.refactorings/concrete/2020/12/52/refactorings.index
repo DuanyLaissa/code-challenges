@@ -1,0 +1,14 @@
+1608588661762	Delete element
+1608591338433	Move file
+1608591379342	Delete element
+1608592118039	Rename package 'concrete'
+1608598346013	Rename field 'price'
+1608611273009	Rename type 'ItemsEnum'
+1608612147732	Delete element
+1608617856423	Rename local variable 'currentQtdA'
+1608655403418	Rename method 'sequenceScan'
+1608655759379	Rename method 'giveDiscount'
+1608660605472	Copy compilation units
+1608660626091	Delete elements
+1608660707360	Move compilation unit
+1608660715908	Move compilation unit

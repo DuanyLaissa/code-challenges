@@ -1,0 +1,244 @@
+package control;
+import java.util.ArrayList;
+
+import entity.Item;
+import entity.PriceRules;
+
+public class Checkout {
+
+	private ArrayList<Item> itemList;
+	private PriceRules rules;
+	private int IteratorItemA = 0;
+	private int IteratorItemB = 0;
+	private int IteratorItemC = 0;
+	private int IteratorItemD = 0;
+
+	public Checkout (PriceRules priceRules) {
+		this.itemList = new ArrayList<Item>();
+		rules = priceRules;
+	}
+
+
+	public ArrayList<Item> getItemList() {
+		return itemList;
+	}
+
+	public void scan (String itemId) {
+
+		Item item;
+
+		if(rules.getPricingRulesTable().containsKey(itemId)) {
+
+			int price = rules.getUnitPrice(itemId);
+			item = new Item(itemId, price);
+			this.itemList.add(item);
+			itemIterator(itemId);
+
+		}else {
+			System.out.println("Unknown item. Couldn't finish operation.");
+		}
+
+	}
+	private void itemIterator(String itemId) {
+
+		if(itemId.equals("A")) {
+			this.IteratorItemA++;
+		}
+		else if (itemId.equals("B")) {
+			this.IteratorItemB++;
+		}
+		else if (itemId.equals("C")){
+			this.IteratorItemC++;
+		}
+		else if(itemId.equals("D")){
+			this.IteratorItemD++;
+		}
+	}
+
+	public int priceList(String itemsIDSequence) {
+
+		newItemList();
+		resetIterators();
+		
+		char[]itemsList = itemsIDSequence.toCharArray();
+		for(char id : itemsList) {
+			String item = Character.toString(id);
+			scan(item);
+		}
+		return getTotal();
+	}
+
+	private int getTotalForPrint () {
+		int totalPrice = 0;
+
+		for (Item i : this.itemList ) {			
+			totalPrice = totalPrice+ i.getPrice();
+		}
+		if(checkForPromo(itemList)) {
+
+			if(IteratorItemA>= rules.getPromoQuantity("A")){
+				totalPrice -= giveAndPrintDiscount("A", IteratorItemA);	
+			}
+			if(IteratorItemB>= rules.getPromoQuantity("B")){
+				totalPrice -= giveAndPrintDiscount("B", IteratorItemB);	
+			}
+			if(IteratorItemC>= rules.getPromoQuantity("C")){
+				totalPrice -= giveAndPrintDiscount("C", IteratorItemC);	
+			}
+			if(IteratorItemD>= rules.getPromoQuantity("D")){
+				totalPrice -= giveAndPrintDiscount("D", IteratorItemD);	
+			}
+		}
+		return totalPrice;
+	}
+	
+	public int getTotal() {
+		int totalPrice = 0;
+
+		for (Item i : this.itemList ) {			
+			totalPrice = totalPrice+ i.getPrice();
+		}
+		if(checkForPromo(itemList)) {
+
+			if(IteratorItemA>= rules.getPromoQuantity("A")){
+				totalPrice -= giveDiscount("A", IteratorItemA);	
+			}
+			if(IteratorItemB>= rules.getPromoQuantity("B")){
+				totalPrice -= giveDiscount("B", IteratorItemB);	
+			}
+			if(IteratorItemC>= rules.getPromoQuantity("C")){
+				totalPrice -= giveDiscount("C", IteratorItemC);	
+			}
+			if(IteratorItemD>= rules.getPromoQuantity("D")){
+				totalPrice -= giveDiscount("D", IteratorItemD);	
+			}
+		}
+		return totalPrice;
+	}
+
+	private void newItemList() {
+		this.itemList.clear();
+	}
+
+	private void resetIterators() {
+		this.IteratorItemA = 0;
+		this.IteratorItemB = 0;
+		this.IteratorItemC = 0;
+		this.IteratorItemD = 0;
+	}
+
+	private boolean checkForPromo(ArrayList<Item> itemList) {
+		boolean hasPromo = false;
+
+		for(Item i: itemList) {
+			String itemID = i.getId();
+
+			if(rules.getPromoQuantity(itemID) > 1) {
+				hasPromo = true;
+				break;
+			}
+		}
+		return hasPromo;
+	}
+
+	private int giveAndPrintDiscount(String itemID, int itemIterator) {
+
+		int discount;
+
+		int minQuantity = rules.getPromoQuantity(itemID);		
+		int specialPrice = rules.getSpecialPrice(itemID);
+		int unitPrice = rules.getUnitPrice(itemID);
+
+		if(itemIterator >=minQuantity && minQuantity>1) {
+
+			unitPrice = rules.getUnitPrice(itemID);
+			int fullPrice = minQuantity*unitPrice;
+			int discountMultiplier = itemIterator/minQuantity;
+			discount = (fullPrice - specialPrice)*discountMultiplier;
+			System.out.println("You recieved " + discount +" off on item "+ itemID);
+		}else {
+			discount = 0;
+		}
+
+		return discount;
+	}
+	
+	private int giveDiscount(String itemID, int itemIterator) {
+
+		int discount;
+
+		int minQuantity = rules.getPromoQuantity(itemID);		
+		int specialPrice = rules.getSpecialPrice(itemID);
+		int unitPrice = rules.getUnitPrice(itemID);
+
+		if(itemIterator >=minQuantity && minQuantity>1) {
+
+			unitPrice = rules.getUnitPrice(itemID);
+			int fullPrice = minQuantity*unitPrice;
+			int discountMultiplier = itemIterator/minQuantity;
+			discount = (fullPrice - specialPrice)*discountMultiplier;
+		}else {
+			discount = 0;
+		}
+
+		return discount;
+	}
+
+	public void printItemList () {
+		if(!itemList.isEmpty()) {
+			System.out.println(" ");
+			for (Item i : this.itemList){
+				System.out.println(i.getId()+" | "+ i.getPrice());
+			}
+		}else {
+			System.out.println("There's no item on this list.");
+		}
+	}
+
+	public void printTotal() {
+		System.out.println("Total: "+getTotalForPrint());
+	}
+
+
+	public int getIteratorItemA() {
+		return IteratorItemA;
+	}
+
+
+	public void setIteratorItemA(int IteratorItemA) {
+		this.IteratorItemA = IteratorItemA;
+	}
+
+
+	public int getIteratorItemB() {
+		return IteratorItemB;
+	}
+
+
+	public void setIteratorItemB(int IteratorItemB) {
+		this.IteratorItemB = IteratorItemB;
+	}
+
+
+	public int getIteratorItemC() {
+		return IteratorItemC;
+	}
+
+
+	public void setIteratorItemC(int IteratorItemC) {
+		this.IteratorItemC = IteratorItemC;
+	}
+
+
+	public int getIteratorItemD() {
+		return IteratorItemD;
+	}
+
+
+	public void setIteratorItemD(int iteratorItemD) {
+		this.IteratorItemD = iteratorItemD;
+	}
+
+
+}
+
