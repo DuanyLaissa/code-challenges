@@ -8,10 +8,10 @@ public class Checkout {
 
 	private ArrayList<Item> itemList;
 	private PriceRules rules;
-	private int interatorItemA = 0;
-	private int interatorItemB = 0;
-	private int interatorItemC = 0;
-	private int interatorItemD = 0;
+	private int iteratorItemA = 0;
+	private int iteratorItemB = 0;
+	private int iteratorItemC = 0;
+	private int iteratorItemD = 0;
 
 	public Checkout (PriceRules priceRules) {
 		this.itemList = new ArrayList<Item>();
@@ -42,23 +42,23 @@ public class Checkout {
 	private void itemIterator(String itemId) {
 
 		if(itemId.equals("A")) {
-			this.interatorItemA++;
+			this.iteratorItemA++;
 		}
 		else if (itemId.equals("B")) {
-			this.interatorItemB++;
+			this.iteratorItemB++;
 		}
 		else if (itemId.equals("C")){
-			this.interatorItemC++;
+			this.iteratorItemC++;
 		}
 		else if(itemId.equals("D")){
-			this.interatorItemD++;
+			this.iteratorItemD++;
 		}
 	}
 
 	public int priceList(String itemsIDSequence) {
 
 		newItemList();
-		resetInterators();
+		resetIterators();
 		
 		char[]itemsList = itemsIDSequence.toCharArray();
 		for(char id : itemsList) {
@@ -76,17 +76,17 @@ public class Checkout {
 		}
 		if(checkForPromo(itemList)) {
 
-			if(interatorItemA>= rules.getPromoQuantity("A")){
-				totalPrice -= giveAndPrintDiscount("A", interatorItemA);	
+			if(iteratorItemA>= rules.getPromoQuantity("A")){
+				totalPrice -= giveAndPrintDiscount("A", iteratorItemA);	
 			}
-			if(interatorItemB>= rules.getPromoQuantity("B")){
-				totalPrice -= giveAndPrintDiscount("B", interatorItemB);	
+			if(iteratorItemB>= rules.getPromoQuantity("B")){
+				totalPrice -= giveAndPrintDiscount("B", iteratorItemB);	
 			}
-			if(interatorItemC>= rules.getPromoQuantity("C")){
-				totalPrice -= giveAndPrintDiscount("C", interatorItemC);	
+			if(iteratorItemC>= rules.getPromoQuantity("C")){
+				totalPrice -= giveAndPrintDiscount("C", iteratorItemC);	
 			}
-			if(interatorItemD>= rules.getPromoQuantity("D")){
-				totalPrice -= giveAndPrintDiscount("D", interatorItemD);	
+			if(iteratorItemD>= rules.getPromoQuantity("D")){
+				totalPrice -= giveAndPrintDiscount("D", iteratorItemD);	
 			}
 		}
 		return totalPrice;
@@ -100,17 +100,17 @@ public class Checkout {
 		}
 		if(checkForPromo(itemList)) {
 
-			if(interatorItemA>= rules.getPromoQuantity("A")){
-				totalPrice -= giveDiscount("A", interatorItemA);	
+			if(iteratorItemA>= rules.getPromoQuantity("A")){
+				totalPrice -= giveDiscount("A", iteratorItemA);	
 			}
-			if(interatorItemB>= rules.getPromoQuantity("B")){
-				totalPrice -= giveDiscount("B", interatorItemB);	
+			if(iteratorItemB>= rules.getPromoQuantity("B")){
+				totalPrice -= giveDiscount("B", iteratorItemB);	
 			}
-			if(interatorItemC>= rules.getPromoQuantity("C")){
-				totalPrice -= giveDiscount("C", interatorItemC);	
+			if(iteratorItemC>= rules.getPromoQuantity("C")){
+				totalPrice -= giveDiscount("C", iteratorItemC);	
 			}
-			if(interatorItemD>= rules.getPromoQuantity("D")){
-				totalPrice -= giveDiscount("D", interatorItemD);	
+			if(iteratorItemD>= rules.getPromoQuantity("D")){
+				totalPrice -= giveDiscount("D", iteratorItemD);	
 			}
 		}
 		return totalPrice;
@@ -120,11 +120,11 @@ public class Checkout {
 		this.itemList.clear();
 	}
 
-	private void resetInterators() {
-		this.interatorItemA = 0;
-		this.interatorItemB = 0;
-		this.interatorItemC = 0;
-		this.interatorItemD = 0;
+	private void resetIterators() {
+		this.iteratorItemA = 0;
+		this.iteratorItemB = 0;
+		this.iteratorItemC = 0;
+		this.iteratorItemD = 0;
 	}
 
 	private boolean checkForPromo(ArrayList<Item> itemList) {
@@ -141,7 +141,7 @@ public class Checkout {
 		return hasPromo;
 	}
 
-	private int giveAndPrintDiscount(String itemID, int itemInterator) {
+	private int giveAndPrintDiscount(String itemID, int itemIterator) {
 
 		int discount;
 
@@ -149,11 +149,11 @@ public class Checkout {
 		int specialPrice = rules.getSpecialPrice(itemID);
 		int unitPrice = rules.getUnitPrice(itemID);
 
-		if(itemInterator >=minQuantity && minQuantity>1) {
+		if(itemIterator >=minQuantity && minQuantity>1) {
 
 			unitPrice = rules.getUnitPrice(itemID);
 			int fullPrice = minQuantity*unitPrice;
-			int discountMultiplier = itemInterator/minQuantity;
+			int discountMultiplier = itemIterator/minQuantity;
 			discount = (fullPrice - specialPrice)*discountMultiplier;
 			System.out.println("You recieved " + discount +" off on item "+ itemID);
 		}else {
@@ -163,7 +163,7 @@ public class Checkout {
 		return discount;
 	}
 	
-	private int giveDiscount(String itemID, int itemInterator) {
+	private int giveDiscount(String itemID, int itemIterator) {
 
 		int discount;
 
@@ -171,11 +171,11 @@ public class Checkout {
 		int specialPrice = rules.getSpecialPrice(itemID);
 		int unitPrice = rules.getUnitPrice(itemID);
 
-		if(itemInterator >=minQuantity && minQuantity>1) {
+		if(itemIterator >=minQuantity && minQuantity>1) {
 
 			unitPrice = rules.getUnitPrice(itemID);
 			int fullPrice = minQuantity*unitPrice;
-			int discountMultiplier = itemInterator/minQuantity;
+			int discountMultiplier = itemIterator/minQuantity;
 			discount = (fullPrice - specialPrice)*discountMultiplier;
 		}else {
 			discount = 0;
@@ -198,8 +198,6 @@ public class Checkout {
 	public void printTotal() {
 		System.out.println("Total: "+getTotalForPrint());
 	}
-
-
 
 }
 

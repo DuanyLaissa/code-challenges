@@ -88,7 +88,6 @@ public class BackToCheckoutTest {
 				);
 	}
 
-
 	@Test
 	public void testTotalDifferentItems() throws InterruptedException {
 		System.out.println("Different Items\n");
@@ -106,10 +105,6 @@ public class BackToCheckoutTest {
 				() -> assertEquals(115, priceDBCA)
 				);
 	}
-
-
-
-
 
 	@Test
 	public void testTotalRepeatedItemsNoOrder() throws InterruptedException {
@@ -136,8 +131,6 @@ public class BackToCheckoutTest {
 				() -> assertEquals(255, priceADADACBDDB)
 				);
 	}
-
-
 
 
 	@Test
