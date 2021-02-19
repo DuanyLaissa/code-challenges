@@ -1,0 +1,27 @@
+#language: pt
+
+Funcionalidade: Confirmar leitura de mensagem
+	Para me comunicar com mais transparência
+	Como um usuário do WhatsApp 
+  Quero ser capaz de confirmar se minha mensagem foi recebida e lida
+
+Contexto:
+  Dado que minhas configurações de confirmação de leitura estão ativadas
+  E que eu estou com um chat aberto no WhatsApp	
+	Quando envio uma mensagem para um contato ativo no WhatsApp
+
+Cenário: Mensagem enviada e lida 
+	Então observo que a mensagem foi recebida
+	E vejo que a mensagem foi lida
+
+Cenário: Mensagem enviada e não lida
+	Então observo que a mensagem foi recebida
+	Mas não vejo que a mensagem foi lida
+  
+Cenário: Mensagem enviada e não recebida	
+	Então observo que a mensagem foi não recebida
+	E vejo que a mensagem não foi lida
+
+Cenário: Mensagem enviada, lida mas sem confirmação do destinatário	
+	Então observo que a mensagem foi recebida
+	Mas não vejo que a mensagem foi lida
