@@ -18,7 +18,7 @@ Cenário: Visualizar que mensagem não foi lida
 	Mas não vejo que a mensagem foi lida
   
 Cenário: Visualizar que mensagem não foi recebida nem lida	
-	Então observo que a mensagem foi não recebida
+	Então observo que a mensagem não foi recebida
 	E vejo que a mensagem não foi lida
 
 Cenário: Visualizar que mensagem foi enviada mas sem confirmação de leitura do destinatário	
