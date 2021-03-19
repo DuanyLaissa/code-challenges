@@ -10,10 +10,10 @@ Contexto: Abrir página principal do Google
         Dado que estou com a página web do Google aberta
 
 Cenário: Acessar a página About via página principal
-        Então seleciono a opção About
+        Quando seleciono a opção About
         E vejo que fui redirecionado para a página About do Google
         
 Cenário: Acessar a página About via pesquisa Google
-        E pesquiso por About Google
+        Quando pesquiso por About Google
         Então seleciono o primeiro resultado da lista exibida
         E vejo que fui redirecionado para a página About do Google
